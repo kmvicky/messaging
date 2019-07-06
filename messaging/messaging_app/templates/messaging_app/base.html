@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+
+	<div class="messaging-wrapper">
+		{% block template %}
+		{% endblock template %}
+	</div>
+
+{% endblock %}
+
+{% block jsdependencies %}
+{% endblock jsdependencies %}
+
+
+{% block javascript %}
+	{% block pagejs %}{% endblock pagejs %}
+{% endblock javascript %}

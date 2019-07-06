@@ -1,0 +1,51 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}Login{% endblock title %}
+
+{% block template %}
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+<div class="ui comments">
+	{% for message in messages %}
+		<div class="comment">
+
+			<div class="content">
+				<a class="author">{{message.created_by.get_full_name}}</a>
+				<div class="metadata">
+					<div class="date"></div>
+				</div>
+				<div class="text">
+					{{message.comment}}
+				</div>
+				<div class="actions">
+					<a class="reply">Reply</a>
+				</div>
+			</div>
+		</div>
+	{% enfor %}
+	<form class="ui reply form">
+		<div class="field">
+			<textarea></textarea>
+		</div>
+		<div class="ui primary submit labeled icon button">
+			<i class="icon edit"></i> Add Comment
+		</div>
+	</form>
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+{% endblock pagejs %}

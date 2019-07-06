@@ -1,0 +1,41 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}Login{% endblock title %}
+
+{% block template %}
+
+<div class="ui grid">
+	<div class="three wide column"></div>
+	<div class="ten wide column">
+		<form class="ui login form" action="{{action}}" method="post">
+
+			<h3 class="header">Login Form</h3>
+
+			<div class="field">
+				<label>Email</label>
+				<input type="text" name="username" placeholder="Email">
+			</div>
+
+			<div class="field">
+				<label>Password</label>
+				<input type="password" name="password" placeholder="Password">
+			</div>
+			{% csrf_token %}
+			<button class="ui button" type="submit">Login</button>
+
+			<a class="ui positive button" href="{% url 'messaging_app:register-user' %}">New to Messaging? Sign Up</a>
+
+			<div class="ui hidden divider"></div>
+		</form>
+
+	</div>
+	<div class="three wide column"></div>
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+{% endblock pagejs %}

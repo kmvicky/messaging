@@ -1,0 +1,35 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}New Conversation{% endblock title %}
+
+{% block template %}
+
+<div class="ui grid">
+	<div class="three wide column"></div>
+	<div class="ten wide column">
+		<form class="ui add-conversation form" action="{{action}}" method="post">
+
+			<h3 class="header">Conversation</h3>
+
+			<div class="field">
+				<label>Comment</label>
+				<input type="text" name="comment" placeholder="comment" {% if comment %} value="{{comment.comment}}" {% endif %}>
+			</div>
+
+			{% csrf_token %}
+			<button class="ui button" type="submit">Save</button>
+
+			<div class="ui hidden divider"></div>
+		</form>
+
+	</div>
+	<div class="three wide column"></div>
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+{% endblock pagejs %}

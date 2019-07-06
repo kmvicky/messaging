@@ -1,0 +1,38 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}Conversations{% endblock title %}
+
+{% block template %}
+
+<div class="ui cards">
+	{% if conversations %}
+		{% for conversation in conversations %}
+			<div class="card">
+				<div class="content">
+					<div class="header">{{conversation.sent_by.get_full_name}}</div>
+					<div class="meta">{{conversation.sent_to.get_full_name}}</div>
+					<div class="description">
+					{{conversation.description}}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<br>
+		<div class="message">No conversations found</div>
+
+	{% endif %}
+
+	{% if can_start_conversion %}
+		<a href="{{start_new}}">Start New Coversation</a>
+	{% endif %}
+
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+{% endblock pagejs %}

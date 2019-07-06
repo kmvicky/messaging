@@ -1,0 +1,54 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}New Conversation{% endblock title %}
+
+{% block template %}
+
+<div class="ui grid">
+	<div class="three wide column"></div>
+	<div class="ten wide column">
+		<form class="ui add-conversation form" action="{{action}}" method="post">
+
+			<h3 class="header">Conversation</h3>
+
+			<div class="field">
+				<label>Description</label>
+				<input type="text" name="description" placeholder="description">
+			</div>
+
+			<div class="field">
+				<div class="ui fluid selection dropdown employee">
+					<i class="dropdown icon"></i>
+					<span class="default text">Employee</span>
+					<input type="hidden" name="employeeId">
+					<div class="menu">
+						{% for employee in employees %}
+							<div class="item" data-value="{{employee.employee.id}}">
+								{{employee.employee.get_full_name}}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+			{% csrf_token %}
+			<button class="ui button" type="submit">Save</button>
+
+			<div class="ui hidden divider"></div>
+		</form>
+
+	</div>
+	<div class="three wide column"></div>
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+	<script type="text/javascript">
+		$form = $("div.messaging-wrapper").find("form.ui.form.add-conversation")
+		initializeControls($form);
+	</script>
+{% endblock pagejs %}

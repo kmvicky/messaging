@@ -1,0 +1,92 @@
+{% extends 'messaging_app/base.html' %}
+
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}SignUp{% endblock title %}
+
+{% block template %}
+
+<div class="ui grid">
+
+	<div class="three wide column"></div>
+
+	<div class="ten wide column">
+
+		<form class="ui form signup-form" action="{{action}}" method="post">
+
+			<div class="two required fields">
+				
+				<div class="required field">
+					<label for="firstname">First Name</label>
+					<input type="text" name="firstname">
+				</div>
+
+				<div class="required field">
+					<label for="lastname">Last Name</label>
+					<input type="text" name="lastname">
+				</div>
+
+			</div>
+
+			<div class="two required fields">
+
+				<div class="required field">
+					<label for="email">Email</label>
+					<input type="text" name="email">
+				</div>
+
+				<div class="required field">
+					<label for="password">Password</label>
+					<input type="password" name="password">
+				</div>
+
+			</div>
+
+			<div class="three fields">
+				<div class="field">
+					<div class="ui checkbox">
+						<label>Candidate</label>
+						<input type="radio" name="employeeType" value="candidate">
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="ui checkbox">
+						<label>Primary Recruiter</label>
+						<input type="radio" name="employeeType" value="R1">
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="ui checkbox">
+						<label>Secondary Recruiter</label>
+						<input type="radio" name="employeeType" value="R2">
+					</div>
+				</div>
+			</div>
+
+			<div class="ui hidden divider"></div>
+
+			<div class="field">
+				<input class="ui tiny uppercase positive action submit button" type="submit" value="{% trans 'Sign Up' %}">
+				<input class="ui tiny uppercase negative action reset button" type="reset" value="{% trans 'Clear' %}">	
+			</div>
+			{% csrf_token %}
+		</form>
+	</div>
+
+	<div class="three wide column"></div>
+	
+</div>
+
+
+{% endblock template %}
+
+{% block pagejs %}
+	<script type="text/javascript">
+		$form = $("div.messaging-wrapper").find("form.ui.form.signup-form")
+		initializeControls($form);
+	</script>
+{% endblock pagejs %}

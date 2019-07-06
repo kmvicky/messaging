@@ -1,0 +1,60 @@
+{% extends 'messaging_app/base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}Conversation Detail{% endblock title %}
+
+{% block template %}
+
+<div class="ui grid">
+
+	<div class="two wide column"></div>
+	<div class="twelve wide column">
+		<div class="ui comments">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="comment">
+
+						<div class="content">
+							<a class="author">{{message.created_by.get_full_name}}</a>
+							<div class="metadata">
+								<div class="date"></div>
+							</div>
+							<div class="text">
+								{{message.comment}}
+							</div>
+							{% if can_delete_comment %}
+								<a class="delete comment" title="Delete comment" href="{% url 'messaging_app:delete-comment' message.id %}">
+								<i class="delete red icon"></i>
+
+								<a class="edit comment" title="Edit comment" href="{% url 'messaging_app:update-comment' conversation.id message.id %}">
+								<i class="pencil icon"></i>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="message">No comments found</div>
+			{% endif %}
+			<form class="ui reply form" action="{{action}}" method="post">
+				<div class="field">
+					<textarea name="comment"></textarea>
+				</div>
+				{% csrf_token %}
+				<button class="ui button" type="submit">Save</button>
+			</form>
+		</div>
+		
+	</div>
+	<div class="two wide column"></div>
+
+</div>
+
+{% endblock template %}
+
+{% block pagejs %}
+	<script type="text/javascript">
+		deleteComment();
+	</script>
+{% endblock pagejs %}
